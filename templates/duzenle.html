@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body{
+    font-family:Arial;
+    background:#fff6ef;
+    padding:20px;
+}
+
+form{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    width:300px;
+}
+
+input{
+    width:100%;
+    padding:8px;
+    margin-bottom:10px;
+}
+
+button{
+    padding:10px;
+    width:100%;
+    background:#f4a261;
+    border:none;
+    color:white;
+}
+</style>
+</head>
+
+<body>
+
+<h2>✏️ Ürün Düzenle</h2>
+
+<form method="post">
+
+İsim:<br>
+<input name="isim" value="{{u['kitap_adi']}}"><br>
+
+Kategori:<br>
+<input name="kategori" value="{{u['kategori']}}"><br>
+
+Alt Kategori:<br>
+<input name="alt_kategori" value="{{u['alt_kategori']}}"><br>
+
+Yayın:<br>
+<input name="yayin" value="{{u['yayin']}}"><br>
+
+Stok:<br>
+<input name="stok" value="{{u['stok']}}"><br>
+
+<button>Kaydet</button>
+
+</form>
+
+</body>
+</html>

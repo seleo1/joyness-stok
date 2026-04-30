@@ -1,0 +1,43 @@
+<h2>➕ Ürün Ekle</h2>
+
+<form method="post">
+    Barkod:<br><input name="barkod"><br>
+    İsim:<br><input name="isim"><br>
+
+    Kategori:<br><input name="kategori"><br>
+    Alt Kategori:<br><input name="alt_kategori"><br>
+
+    Yayın:<br><input name="yayin"><br>
+
+    Stok:<br><input name="stok"><br><br>
+
+    <button>Kaydet</button>
+</form>
+
+<hr>
+
+<h2>📂 Kategori Yönetimi</h2>
+
+<form method="POST" action="/kategori-ekle">
+    <input name="kategori" placeholder="Yeni kategori">
+    <button>EKLE</button>
+</form>
+
+<h4>Mevcut Kategoriler</h4>
+{% for k in kategoriler %}
+<p>{{k}}</p>
+{% endfor %}
+
+<hr>
+
+<h2>🏢 Yayın Yönetimi</h2>
+
+<form method="POST" action="/yayin-ekle">
+    <input name="yayin" placeholder="Yeni yayın">
+    <button>EKLE</button>
+</form>
+
+<h4>Mevcut Yayınlar</h4>
+{% for y in yayinlar %}
+<p>{{y}}</p>
+{% endfor %}

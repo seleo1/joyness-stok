@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body{
+    font-family:Arial;
+    background:#fff6ef;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    width:320px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+h2{
+    margin-bottom:10px;
+    color:#333;
+}
+
+p{
+    margin:6px 0;
+}
+
+button{
+    padding:10px;
+    margin-top:10px;
+    width:100%;
+    border:none;
+    border-radius:6px;
+    background:#f4a261;
+    color:white;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#e76f51;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>{{u["kitap_adi"]}}</h2>
+
+<p><b>Barkod:</b> {{u["barkod"]}}</p>
+<p><b>Kategori:</b> {{u["kategori"]}}</p>
+<p><b>Alt Kategori:</b> {{u["alt_kategori"]}}</p>
+<p><b>Yayın:</b> {{u["yayin"]}}</p>
+<p><b>Stok:</b> {{u["stok"]}}</p>
+
+<a href="/duzenle/{{u['id']}}">
+    <button>✏️ Düzenle</button>
+</a>
+
+<a href="/urunler">
+    <button>⬅️ Geri</button>
+</a>
+
+</div>
+
+</body>
+</html>

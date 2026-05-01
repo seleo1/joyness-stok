@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -9,14 +8,14 @@ body{
     margin:0;
     font-family:'Segoe UI', Arial;
     display:flex;
-    background:#f8f9fb; /* daha soft */
+    background:#f8f9fb;
 }
 
 /* SIDEBAR */
 .sidebar{
     width:260px;
     height:100vh;
-    background:linear-gradient(180deg,#f7c59f,#f4a9a8); /* pastel */
+    background:linear-gradient(180deg,#f7c59f,#f4a9a8);
     padding:15px;
     overflow-y:auto;
     color:white;
@@ -32,11 +31,10 @@ body{
     display:block;
     padding:10px;
     margin-bottom:6px;
-    background:rgba(255,255,255,0.25); /* daha soft */
+    background:rgba(255,255,255,0.25);
     color:white;
     text-decoration:none;
     border-radius:10px;
-    transition:0.2s;
     font-size:14px;
 }
 
@@ -58,18 +56,29 @@ body{
     padding:20px;
 }
 
-.content h2{
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+}
+
+.back-btn{
+    text-decoration:none;
+    padding:8px 12px;
+    background:#ddd;
+    border-radius:10px;
     color:#333;
+    font-size:13px;
 }
 
 /* CARD */
 .card{
-    background:#ffffff;
+    background:white;
     padding:15px;
     margin:12px 0;
     border-radius:15px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.06); /* yumuşak gölge */
-    border:1px solid #f1f1f1;
+    box-shadow:0 4px 12px rgba(0,0,0,0.06);
 }
 
 /* BUTTONS */
@@ -78,62 +87,18 @@ body{
     border-radius:10px;
     text-decoration:none;
     font-weight:bold;
-    font-size:14px;
-    transition:0.15s;
 }
 
-.btn:active{
-    transform:scale(0.9);
-}
+.btn-minus{background:#f28b82;color:white;}
+.btn-plus{background:#81c7b5;color:white;}
+.btn-edit{color:#c97c5d;font-weight:600;}
 
-.btn-minus{
-    background:#f28b82; /* pastel kırmızı */
-    color:white;
-}
+.btn:active{transform:scale(0.95);}
 
-.btn-plus{
-    background:#81c7b5; /* pastel yeşil */
-    color:white;
-}
-
-.btn-edit{
-    color:#c97c5d; /* pastel kahve */
-    font-weight:600;
-}
-
-/* 📱 MOBILE */
-@media (max-width:768px){
-
-    body{
-        flex-direction:column;
-    }
-
-    .sidebar{
-        width:100%;
-        height:auto;
-        display:flex;
-        flex-wrap:wrap;
-        gap:5px;
-    }
-
-    .sidebar a{
-        flex:1;
-        text-align:center;
-        font-size:12px;
-        padding:8px;
-    }
-
-    .content{
-        padding:10px;
-    }
-
-    .card{
-        font-size:14px;
-    }
-
-    .btn{
-        padding:8px 12px;
-    }
+/* MOBILE */
+@media(max-width:768px){
+    body{flex-direction:column;}
+    .sidebar{width:100%;height:auto;}
 }
 </style>
 </head>
@@ -143,119 +108,92 @@ body{
 <!-- SIDEBAR -->
 <div class="sidebar">
 
-<h3>📦 Ürünler</h3>
-<a href="/urunler">Tüm Ürünler</a>
+<h3>📦 Menü</h3>
+
+<a href="/panel">🏠 Panel</a>
+<a href="/urunler">📦 Ürünler</a>
+<a href="/ekle">➕ Ürün Ekle</a>
+<a href="/kamera">📷 Barkod</a>
+
+<!-- 🔥 GERİ LOGİN BUTONU -->
+<a href="/cikis" style="background:#e74c3c;">
+🚪 Çıkış / Girişe Dön
+</a>
 
 <input id="search" onkeyup="ara()" placeholder="Ürün ara...">
 
 <h3>📚 Kategoriler</h3>
-{% if kategoriler %}
-    {% for k in kategoriler %}
-        <a href="/kategori/{{k}}">{{k}}</a>
-    {% endfor %}
-{% else %}
-    <p>Kategori yok</p>
-{% endif %}
+{% for k in kategoriler %}
+    <a href="/kategori/{{k}}">{{k}}</a>
+{% endfor %}
 
 <h3>🏢 Yayınlar</h3>
-{% if yayinlar %}
-    {% for y in yayinlar %}
-        <a href="/yayin/{{y}}">{{y}}</a>
-    {% endfor %}
-{% else %}
-    <p>Yayın yok</p>
-{% endif %}
-
-<h3>➕ İşlemler</h3>
-<a href="/ekle">Ürün Ekle</a>
+{% for y in yayinlar %}
+    <a href="#">{{y}}</a>
+{% endfor %}
 
 </div>
 
 <!-- CONTENT -->
 <div class="content">
 
-<h2>📦 Ürün Listesi</h2>
+<div class="header">
+    <h2>📦 Ürünler</h2>
+
+    <!-- GERİ PANEL -->
+    <a class="back-btn" href="/panel">⬅ Panel</a>
+</div>
 
 {% for u in data %}
 <div class="card">
 
-    <div style="font-weight:600;font-size:16px;">
-        {{u["kitap_adi"]}}
-    </div>
+    <b>{{u["kitap_adi"]}}</b><br>
 
-    <div style="color:#666;font-size:13px;margin-top:5px;">
-        📚 {{u["kategori"]}} / {{u["alt_kategori"]}}
-    </div>
+    <small>📚 {{u["kategori"]}} / {{u["alt_kategori"]}}</small><br>
+    <small>🏢 {{u["yayin"]}}</small>
 
-    <div style="color:#888;font-size:13px;">
-        🏢 {{u["yayin"]}}
-    </div>
+    <br><br>
 
-    <br>
+    📦
+    <a class="btn btn-minus" onclick="stokDegistir({{u['id']}}, -1)">−</a>
 
-    <div style="display:flex;align-items:center;gap:8px;">
-        <span>📦</span>
+    <b id="stok-{{u['id']}}">{{u["stok"]}}</b>
 
-        <a class="btn btn-minus" onclick="stokDegistir({{u['id']}}, -1)">−</a>
+    <a class="btn btn-plus" onclick="stokDegistir({{u['id']}}, 1)">+</a>
 
-<b id="stok-{{u['id']}}">{{u["stok"]}}</b>
+    <br><br>
 
-<a class="btn btn-plus" onclick="stokDegistir({{u['id']}}, 1)">+</a>
-    </div>
-
-    <br>
-
-    <div style="display:flex;gap:10px;">
-        <a class="btn-edit" href="/urun/{{u['barkod']}}">Detay</a>
-        <a class="btn-edit" href="/duzenle/{{u['id']}}">Düzenle</a>
-    </div>
+    <a class="btn-edit" href="/urun/{{u['barkod']}}">Detay</a>
+    <a class="btn-edit" href="/duzenle/{{u['id']}}">Düzenle</a>
 
 </div>
 {% endfor %}
 
 </div>
 
-<!-- SEARCH -->
-<script>
-let kartVeri = [];
-
-window.onload = function(){
-    let kartlar = document.getElementsByClassName("card");
-
-    for(let i=0;i<kartlar.length;i++){
-        kartVeri.push({
-            el: kartlar[i],
-            text: kartlar[i].innerText.toLowerCase()
-        });
-    }
-}
-
-function ara(){
-    let input = document.getElementById("search").value.toLowerCase();
-
-    for(let i=0;i<kartVeri.length;i++){
-        kartVeri[i].el.style.display =
-            kartVeri[i].text.includes(input) ? "block" : "none";
-    }
-}
-</script>
 <script>
 function stokDegistir(id, degisim){
     fetch("/stok-guncelle", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            id: id,
-            degisim: degisim
-        })
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({id:id, degisim:degisim})
     })
-    .then(res => res.json())
-    .then(data => {
-        document.getElementById("stok-" + id).innerText = data.stok;
+    .then(r=>r.json())
+    .then(data=>{
+        document.getElementById("stok-"+id).innerText = data.stok;
     });
 }
+
+/* ARAMA */
+function ara(){
+    let input = document.getElementById("search").value.toLowerCase();
+    let cards = document.getElementsByClassName("card");
+
+    for(let c of cards){
+        c.style.display = c.innerText.toLowerCase().includes(input) ? "block" : "none";
+    }
+}
 </script>
+
 </body>
 </html>

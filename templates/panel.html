@@ -6,109 +6,135 @@
 <style>
 body{
     margin:0;
-    font-family:Arial;
-    display:flex;
-    background:#fff6ef;
+    font-family:'Segoe UI', Arial;
+    background:#f7f8fc;
 }
 
-/* SOL MENÜ */
-.menu{
-    width:220px;
-    height:100vh;
-    background:#f4a261;
+/* HEADER */
+.header{
+    background:linear-gradient(135deg,#f4a261,#e76f51);
+    color:white;
+    padding:20px;
+    text-align:center;
+    font-size:20px;
+    font-weight:bold;
+}
+
+/* CONTENT */
+.content{
     padding:15px;
+}
+
+/* CARD */
+.card{
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    margin-bottom:15px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.08);
+}
+
+/* GRID BUTTON */
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.btn{
     display:flex;
     flex-direction:column;
-}
-
-.menu h2{
-    color:white;
-    margin-bottom:20px;
-}
-
-/* MENÜ BUTON */
-.menu a{
-    display:block;
-    padding:12px;
-    color:white;
+    justify-content:center;
+    align-items:center;
+    height:90px;
+    border-radius:18px;
     text-decoration:none;
+    color:white;
     font-weight:bold;
-    margin-bottom:8px;
-    border-radius:10px;
+    font-size:14px;
     transition:0.2s;
 }
 
-.menu a:hover{
-    background:#e76f51;
+.btn:active{
+    transform:scale(0.95);
 }
 
-/* AKTİF */
-.menu a.active{
-    background:#d35400;
-}
+/* RENKLER */
+.b1{ background:#f4a261; }
+.b2{ background:#2a9d8f; }
+.b3{ background:#e76f51; }
+.b4{ background:#6c5ce7; }
 
-/* SAĞ ALAN */
-.content{
-    flex:1;
-    padding:25px;
-}
-
-/* KART */
-.card{
+/* ALT MENU */
+.bottom{
+    position:fixed;
+    bottom:0;
+    width:100%;
     background:white;
-    padding:20px;
-    border-radius:15px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
-    margin-bottom:20px;
+    display:flex;
+    justify-content:space-around;
+    border-top:1px solid #ddd;
+    padding:10px 0;
 }
 
-/* BUTON */
-.btn{
-    display:inline-block;
-    padding:12px 15px;
-    background:#f4a261;
-    color:white;
-    border-radius:10px;
+.bottom a{
     text-decoration:none;
-    margin-top:10px;
+    color:#555;
+    font-size:13px;
+    text-align:center;
 }
 
-.btn:hover{
-    background:#e76f51;
+/* MOBİL */
+@media(max-width:600px){
+    .btn{
+        height:80px;
+        font-size:13px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- SOL MENÜ -->
-<div class="menu">
-    <h2>📚 Joyness</h2>
-
-    <a href="/panel" class="active">🏠 Panel</a>
-    <a href="/urunler">📦 Ürünler</a>
-    <a href="/kamera">📷 Barkod Oku</a>
-    <a href="/ekle">➕ Ürün Ekle</a>
-    <a href="/cikis">🚪 Çıkış</a>
+<div class="header">
+🐼 Joyness POS
 </div>
 
-<!-- SAĞ İÇERİK -->
 <div class="content">
 
-    <div class="card">
-        <h1>🐼 Joyness POS</h1>
-        <p>Sistem hazır 🚀</p>
-        <p>Soldaki menüden işlemler yapabilirsin.</p>
-    </div>
+<div class="card">
+<h3>Hoşgeldin 👋</h3>
+<p>Sistem hazır. Hızlı işlemleri kullanabilirsin.</p>
+</div>
 
-    <div class="card">
-        <h3>Hızlı İşlemler</h3>
+<div class="grid">
 
-        <a href="/kamera" class="btn">📷 Barkod Oku</a>
-        <a href="/urunler" class="btn">📦 Ürünleri Gör</a>
-        <a href="/ekle" class="btn">➕ Ürün Ekle</a>
-    </div>
+<a href="/kamera" class="btn b1">
+📷<br>Barkod Oku
+</a>
 
+<a href="/urunler" class="btn b2">
+📦<br>Ürünler
+</a>
+
+<a href="/ekle" class="btn b3">
+➕<br>Ürün Ekle
+</a>
+
+<a href="/cikis" class="btn b4">
+🚪<br>Çıkış
+</a>
+
+</div>
+
+</div>
+
+<!-- ALT MENÜ -->
+<div class="bottom">
+<a href="/panel">🏠<br>Ana</a>
+<a href="/urunler">📦<br>Ürün</a>
+<a href="/kamera">📷<br>Okut</a>
+<a href="/ekle">➕<br>Ekle</a>
 </div>
 
 </body>

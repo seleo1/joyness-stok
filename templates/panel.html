@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style>
 body{
     margin:0;
     font-family:Arial;
     display:flex;
+    background:#fff6ef;
 }
 
 /* SOL MENÜ */
@@ -14,46 +17,98 @@ body{
     height:100vh;
     background:#f4a261;
     padding:15px;
+    display:flex;
+    flex-direction:column;
 }
 
+.menu h2{
+    color:white;
+    margin-bottom:20px;
+}
+
+/* MENÜ BUTON */
 .menu a{
     display:block;
     padding:12px;
     color:white;
     text-decoration:none;
     font-weight:bold;
-    margin-bottom:5px;
+    margin-bottom:8px;
+    border-radius:10px;
+    transition:0.2s;
 }
 
 .menu a:hover{
     background:#e76f51;
 }
 
+/* AKTİF */
+.menu a.active{
+    background:#d35400;
+}
+
 /* SAĞ ALAN */
 .content{
     flex:1;
-    padding:20px;
-    background:#fff6ef;
+    padding:25px;
 }
 
-h1{
-    color:#d2691e;
+/* KART */
+.card{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    margin-bottom:20px;
+}
+
+/* BUTON */
+.btn{
+    display:inline-block;
+    padding:12px 15px;
+    background:#f4a261;
+    color:white;
+    border-radius:10px;
+    text-decoration:none;
+    margin-top:10px;
+}
+
+.btn:hover{
+    background:#e76f51;
 }
 </style>
 </head>
 
 <body>
 
+<!-- SOL MENÜ -->
 <div class="menu">
-    <a href="/panel">🏠 Panel</a>
+    <h2>📚 Joyness</h2>
+
+    <a href="/panel" class="active">🏠 Panel</a>
     <a href="/urunler">📦 Ürünler</a>
+    <a href="/kamera">📷 Barkod Oku</a>
     <a href="/ekle">➕ Ürün Ekle</a>
     <a href="/cikis">🚪 Çıkış</a>
 </div>
 
+<!-- SAĞ İÇERİK -->
 <div class="content">
-    <h1>🐼 Joyness POS Panel</h1>
-    <p>Sistem hazır. Soldan seçim yap.</p>
+
+    <div class="card">
+        <h1>🐼 Joyness POS</h1>
+        <p>Sistem hazır 🚀</p>
+        <p>Soldaki menüden işlemler yapabilirsin.</p>
+    </div>
+
+    <div class="card">
+        <h3>Hızlı İşlemler</h3>
+
+        <a href="/kamera" class="btn">📷 Barkod Oku</a>
+        <a href="/urunler" class="btn">📦 Ürünleri Gör</a>
+        <a href="/ekle" class="btn">➕ Ürün Ekle</a>
+    </div>
+
 </div>
 
 </body>

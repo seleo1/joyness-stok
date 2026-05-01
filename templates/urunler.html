@@ -155,11 +155,11 @@ body{
     <br><br>
 
     📦
-    <a class="btn btn-minus" onclick="stokDegistir({{u['id']}}, -1)">−</a>
+    <button class="btn btn-minus" onclick="stokDegistir({{u['id']}}, -1)">−</button>
 
-    <b id="stok-{{u['id']}}">{{u["stok"]}}</b>
+<b id="stok-{{u['id']}}">{{u["stok"]}}</b>
 
-    <a class="btn btn-plus" onclick="stokDegistir({{u['id']}}, 1)">+</a>
+<button class="btn btn-plus" onclick="stokDegistir({{u['id']}}, 1)">+</button>
 
     <br><br>
 
@@ -194,6 +194,28 @@ function ara(){
     }
 }
 </script>
+<script>
+function stokDegistir(id, degisim){
 
+    fetch("/stok-guncelle", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            id: Number(id),
+            degisim: Number(degisim)
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("stok-" + id).innerText = data.stok;
+    })
+    .catch(err => {
+        alert("Hata oluştu: " + err);
+    });
+
+}
+</script>
 </body>
 </html>

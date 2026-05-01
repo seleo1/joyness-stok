@@ -166,15 +166,26 @@ def stok_guncelle():
 
     df = yukle()
 
+    # güvenlik: tip düzeltme
+    df["id"] = df["id"].astype(int)
+    df["stok"] = pd.to_numeric(df["stok"], errors="coerce").fillna(0).astype(int)
+
+    # ürün var mı kontrol
+    if id not in df["id"].values:
+        return jsonify({"stok": 0})
+
+    # stok güncelle
     df.loc[df["id"] == id, "stok"] += degisim
+
+    # negatif olmasın
     df.loc[df["stok"] < 0, "stok"] = 0
 
-    stok = int(df.loc[df["id"] == id, "stok"].values[0])
+    # yeni stok
+    yeni_stok = int(df.loc[df["id"] == id, "stok"].values[0])
 
     kaydet(df)
 
-    return jsonify({"stok": stok})
-
+    return jsonify({"stok": yeni_stok})
 
 # ---------------- KAMERA ----------------
 @app.route("/kamera")

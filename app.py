@@ -217,6 +217,28 @@ def kamera():
     </body>
     </html>
     """
+from flask import jsonify
+
+@app.route("/stok-guncelle", methods=["POST"])
+def stok_guncelle():
+    data = request.get_json()
+
+    id = int(data["id"])
+    degisim = int(data["degisim"])
+
+    df = yukle()
+
+    df["id"] = df["id"].astype(int)
+
+    df.loc[df["id"] == id, "stok"] += degisim
+    df.loc[df["stok"] < 0, "stok"] = 0
+
+    stok = int(df.loc[df["id"] == id, "stok"].values[0])
+
+    kaydet(df)
+
+    return jsonify({"stok": stok})
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)

@@ -190,7 +190,33 @@ def stok_azalt(id):
     df.loc[df["stok"] < 0, "stok"] = 0
     kaydet(df)
     return redirect("/urunler")
+# 📷 KAMERA (BARKOD OKUTMA)
+@app.route("/kamera")
+def kamera():
+    return """
+    <html>
+    <head>
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    </head>
 
+    <body style="text-align:center;font-family:Arial;">
+
+    <h2>Barkod Oku</h2>
+
+    <div id="reader" style="width:300px;margin:auto;"></div>
+
+    <script>
+    function onScanSuccess(decodedText) {
+        window.location.href = "/urun/" + decodedText;
+    }
+
+    new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 })
+        .render(onScanSuccess);
+    </script>
+
+    </body>
+    </html>
+    """
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)

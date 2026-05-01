@@ -118,14 +118,29 @@ def urun_detay(barkod):
 def duzenle(id):
     df = yukle()
 
-    if request.method == "POST":
-        df.loc[df["id"] == id, "kitap_adi"] = request.form["isim"]
-        df.loc[df["id"] == id, "kategori"] = request.form["kategori"]
-        df.loc[df["id"] == id, "alt_kategori"] = request.form["alt_kategori"]
-        df.loc[df["id"] == id, "yayin"] = request.form["yayin"]
-        df.loc[df["id"] == id, "stok"] = int(request.form["stok"])
+    # id tipini garantiye al
+    df["id"] = df["id"].astype(int)
 
-        kaydet(df)
+    if request.method == "POST":
+        try:
+            df.loc[df["id"] == id, "kitap_adi"] = request.form.get("isim","")
+            df.loc[df["id"] == id, "kategori"] = request.form.get("kategori","")
+            df.loc[df["id"] == id, "alt_kategori"] = request.form.get("alt_kategori","")
+            df.loc[df["id"] == id, "yayin"] = request.form.get("yayin","")
+
+            # stok güvenli çevir
+            try:
+                stok = int(request.form.get("stok","0"))
+            except:
+                stok = 0
+
+            df.loc[df["id"] == id, "stok"] = stok
+
+            kaydet(df)
+
+        except Exception as e:
+            return f"HATA: {e}"
+
         return redirect("/urunler")
 
     urun = df[df["id"] == id]
@@ -136,7 +151,6 @@ def duzenle(id):
     u = urun.iloc[0].to_dict()
 
     return render_template("duzenle.html", u=u)
-
 
 # EKLE
 @app.route("/ekle", methods=["GET","POST"])

@@ -26,7 +26,7 @@ def yukle():
         if "id" not in df.columns:
             df["id"] = range(1, len(df) + 1)
 
-        df["id"] = pd.to_numeric(df["id"], errors="coerce").fillna(0).astype(int)
+        df["id"] = d.to_numeric(df["id"], errors="coerce").fillna(0).astype(int)
 
         # STOK (EN ÖNEMLİ FIX)
         if "stok" not in df.columns:
@@ -185,40 +185,7 @@ def stok_guncelle():
 
     kaydet(df)
 
-    return jsonify({"stok": yeni_stok})
-
-# ---------------- KAMERA ----------------
-@app.route("/kamera")
-def kamera():
-    return """
-    <html>
-    <head>
-    <script src="https://unpkg.com/html5-qrcode"></script>
-    </head>
-
-    <body style="text-align:center;font-family:Arial;">
-    <h2>Barkod Oku</h2>
-
-    <div id="reader" style="width:300px;margin:auto;"></div>
-
-    <script>
-    function onScanSuccess(text){
-        window.location.href="/urun/"+text;
-    }
-
-    new Html5QrcodeScanner("reader", { fps:10, qrbox:250 })
-        .render(onScanSuccess);
-    </script>
-
-    </body>
-    </html>
-    """
-
-
-# ---------------- ÇIKIŞ ----------------
-@app.route("/cikis")
-def cikis():
-    session.clear()
+    return 
     return redirect("/")
 
 
